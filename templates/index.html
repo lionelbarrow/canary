@@ -1,0 +1,72 @@
+{% extends "_app.html" %}
+{% block body %}
+            <div id="text">
+                <div id="intro">
+                    <h3>"Is the US heading for another recession?"</h3>
+                    <p>If you hear this question on the news, it's
+                    probably too late to do much about it. Today's media
+                    does not warn us of future recessions far enough ahead
+                    of time to be useful.</p>
+                    <p>Businesses plan their budgets at least six
+                    months in advance. They make their plans based on past budget
+                    requirements and expected growth, usually calculated
+                    using previous trends.  If there is an unexpected
+                    disruption in these trends, businesses can
+                    end up with unsuccessful marketing campaigns, merchandise
+                    they can't sell, and debt they can't pay back.</p>
+                    <p>Consumers face the same problems. When a recession
+                    hits, medium-term expenses - a new car, an expensive vacation
+                    on the credit card - are what we regret the most. How much better
+                    off would you have been if you had a clear warning six months before
+                    the last recession began?</p>
+                </div>
+                <div id="pitch">
+                    <h3>Recessions are predictable</h3>
+                    <p class="p1">We predict US recessions using a
+                    simple, powerful model that economists from the Federal Reserve
+                    board on down have backed. We use general
+                    macroeconomic variables - interest rates - to predict recessions
+                    <strong>six to twelve months before they begin</strong>.
+                    Our goal is to give ordinary people reliable information far enough in advance
+                    to be useful.</p>
+                    <img src="{{STATIC_URL}}/alltime.png">
+                    <p>This chart shows the probability of a recession in the next
+                    six to twelve months, as estimated by our model. The blue line
+                    is the estimated probability, and the grey vertical lines are
+                    months when the US was in a recession. If the blue line goes
+                    over the red line</i>, the model predicts that a recession is coming.</p>
+                    <p>Looking backwards, our model would have
+                    predicted 6 of the last 7 US recessions, including the Great
+                    Recession of 2008. Only once would the model have predicted a
+                    recession that didn't happen.</p>
+                </div>
+                <div id="signup" name="signup">
+                    <h3>Get advance warning when a recession is coming</h3>
+                    <p>Enter your email address in the form below and we'll email
+                    you when the model predicts a recession. You can also get forecast
+                    updates at weekly or monthly intervals.
+                    Remember, the model is trying to predict recessions at least six
+                    months in advance, so if you get an email, it might not yet be
+                    obvious that a recession is coming.</p>
+                  <form name="mail" action="{{ url_for('index') }}#signup" method="POST">
+                        When do you want to receive forecasts?
+                        <input type="checkbox" name="monthly" value="monthly"/> Monthly &nbsp
+                        <input type="checkbox" name="if_recession" value="if_recession"/> If the model
+                        predicts a recession <br>
+                        Email Address: <input type="text" name="email" maxlength="40"/>
+                        <input type="submit" value="Submit"/>
+                        {% if success %}<b>Email address added! Thanks!</b>{% endif %}
+                    </form>
+                    <p>We will not spam you or share your email address.</p>
+                </div>
+                <div id="commons">
+                    <h3>Everyone benefits from anticipating a recession</h3>
+                    <p>Regardless of their immediate cause, recessions are prolonged
+                    and deepened by a lack of consumer demand. If everyone began
+                    saving a little before a recession started, we'd be able to cut
+                    back less once the recession actually hits. Softening the dip
+                    in consumer spending would make the recession much shorter
+                    and less painful.</p>
+                </div>
+            </div>
+{% endblock body %}
