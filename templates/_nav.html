@@ -1,6 +1,7 @@
+{% import "_helpers.html" as helpers with context %}
 <ul class="nav nav-tabs">
-  <li class="active"><a href="{{ url_for('index') }}">Home</a></li>
-  <li><a href="{{ url_for('forecast') }}">Current Forecast</a></li>
-  <li><a href="{{ url_for('models') }}">Model Details</a></li>
-  <li><a href="{{ url_for('about') }}">About</a></li>
+  {{ helpers.list_nav_link('index', 'Home') }}
+  {{ helpers.list_nav_link('forecast', 'Current Forecast') }}
+  {{ helpers.list_nav_link('models', 'Model Details') }}
+  {{ helpers.list_nav_link('about', 'About') }}
 </ul>

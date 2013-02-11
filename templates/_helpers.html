@@ -1,0 +1,7 @@
+{% macro list_nav_link(endpoint, name) %}
+  {%- if url_for(endpoint) == request.script_root + request.path -%}
+    <li class="active"><a href="{{ url_for(endpoint) }}">{{ name }}</a></li>
+  {%- else -%}
+    <li><a href="{{ url_for(endpoint) }}">{{ name }}</a></li>
+  {%- endif -%}
+{% endmacro %}
