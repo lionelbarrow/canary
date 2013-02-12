@@ -1,7 +1,8 @@
 {% import "_helpers.html" as helpers with context %}
-<ul class="nav nav-tabs">
-  {{ helpers.list_nav_link('index', 'Home') }}
-  {{ helpers.list_nav_link('forecast', 'Current Forecast') }}
-  {{ helpers.list_nav_link('models', 'Model Details') }}
-  {{ helpers.list_nav_link('about', 'About') }}
-</ul>
+<div class="row">
+  <ul class="nav nav-tabs pull-right">
+    {{ helpers.list_nav_link('index', 'Home') }}
+    {{ helpers.list_nav_link('forecast', 'Current Forecast') }}
+    {{ helpers.list_nav_link('faq', 'FAQ') }}
+  </ul>
+</div>

@@ -5,3 +5,7 @@
     <li><a href="{{ url_for(endpoint) }}">{{ name }}</a></li>
   {%- endif -%}
 {% endmacro %}
+
+{% macro list_link_to_section(id, name) %}
+<p class="text-center"><a href="#{{ id }}">{{ name }}</a></p>
+{% endmacro %}

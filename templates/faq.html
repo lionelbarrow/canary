@@ -1,0 +1,122 @@
+{% extends "_app.html" %}
+{% import "_helpers.html" as helpers %}
+{% block body %}
+
+<h2><p class="text-center">FAQ</p></h2>
+
+{{ helpers.list_link_to_section('why_work', 'Why does this work?') }}
+{{ helpers.list_link_to_section('historical_performance', 'How has this model done historically?') }}
+{{ helpers.list_link_to_section('how_calculated', 'How are these numbers calculated?') }}
+{{ helpers.list_link_to_section('always_right', 'Can you guarantee you\'ll be right?') }}
+{{ helpers.list_link_to_section('about', 'Who made this site?') }}
+
+<h3 id="why_work">Why does this work?</h3>
+<p>Investors buying US treasury bonds typically
+  demand to be paid higher interest rates on long-term bonds than on short
+  term-bonds. This reflects two things: the greater risk inherently
+  associated with buying a longer-term asset, and the fact that
+  having money in the present is more valuable than having
+  it in the future.</p>
+<p>Rarely, however, investors demand higher
+  interest rates from short-term bonds than from long-term bonds.
+  This behavior indicates that they believe that holding a small
+  amount of money in the short term will be much more valuable than
+  holding a larger amount of money in the long term. This can
+  indicate that a recession is imminent. Some
+  economists believe that the distribution of these interest rates
+  - generally referred to as the
+  <a href="http://en.wikipedia.org/wiki/Yield_curve">yield curve</a>
+  - can be used to forecast economic growth<a href="#references">
+    [1]</a>. If this is true, then the yield curve can also be used to
+  predict recessions; predicting recessions is just a specific case of
+  predicting economic growth in general.</p>
+<p class="p3">Our model takes advantage of this expectation
+  by using the spread (difference) of the two rates as its main
+  feature. However, interest rates can vary for reasons other than
+  the general state of the economy, so the model also includes the
+  rate at which banks lend each other money overnight, the Federal
+  funds rate (FFR), to account for the interest
+  rate environment.</p>
+
+<h3 id="historical_performance">How has this model done historically?</h3>
+<p>The model is trained using historical data from January 1964
+  onwards. Before this point in US history, most long-term bonds
+  were either callable or redeemable to pay estate taxes, making
+  them structurally dissimilar to modern long-term bonds <a href="#references">[2]</a>.</p>
+
+<p>Since 1964 there have been 7 periods classified by the National
+  Bureau of Economic Research (NEBR) as recessions. Note that the
+  NEBR does not define a recession as two or more consecutive quarters of
+  negative growth as is common in the media; a NEBR recession
+  is the period of time between the peak of the business cycle and
+  its trough.</p>
+
+<p>If we start the algorithm at 1964 and play it forward, it
+  successfully predicts 6 of the 7 NEBR recessions: it fails to
+  predict the mild recession in the early 1990s but gets
+  everything else. Additionally, it throws a single false positive:
+  it predicts a recession in the late 60s that never happened.
+  The chart below shows the model's performance over the entire
+  period, with black verticle lines drawn for months when the
+  economy was in recession.</p>
+<img src="{{STATIC_URL}}/alltime_model.png"/>
+<p>In this context, the phrase "the model predicted the recession"
+  means that at some point in the period 6 to 12 months before the
+  recession began, the estimated probability of future recession
+  rose above 50%.</p>
+
+<h3 id="how_calculated">How are these numbers calculated?</h3>
+<p class="p1">The probabilities we display are output by a
+  probit CDF regression using historical data, averaged monthly from
+  1964 to the present day. Two sources of data are used in the regression:
+  the spread between the yields of 6-month and 10-year US Treasury
+  notes, and the Federal funds rate. This model is mostly derived
+  from a 2007 paper by Wright <a href="#references">[2]</a>, with
+  modifications inspired by more recent papers
+  <a href="#references">[3]</a><a href="#references">[4]</a>.</p>
+
+<h3 id="always_right">Can you guarantee you'll be right?</h3>
+<p>Of course not! These predictions are only statistical guesses,
+  and there are any number of ways in which they could go wrong.
+  Most obviously, this model makes predictions based off the
+  aggregate actions of the people buying and selling US treasury bonds.
+  If something happens that those people did not anticipate, such
+  as a natural disaster, then there is no way for the model to
+  anticipate it either.</p>
+<p>More generally, it's risky to predict macroeconomic behavior
+  based on the relationship between various economic indicators in
+  the past. This is because the policy environment in which these
+  relationships exists is not constant; it's always possible that a
+  relationship between economic indicators only exists under certain
+  policies, and that by changing these policies, this relationship
+  will (accidentally) be destroyed. This objection is usually
+  referred to as the <a href="http://en.wikipedia.org/wiki/Lucas_critique">
+    Lucas critique</a>.</p>
+
+<h3 id="about">Who made this site?</h3>
+<p>This site was made by <a href="http://www.lionelbarrow.com" target="_blank">
+    Lionel Barrow</a>. Lionel is a developer at Braintree and a part-time graduate
+  student at the University of Chicago. The project's
+  source code is available on
+  <a href="https://github.com/lionelbarrow/canary_models">Github</a>.</p>
+
+<h3 id="references">References</h3>
+<ol>
+  <li><a href="http://www.sciencedirect.com/science/article/pii/S0304407605000163">
+      Andrew Ang, Monika Piazzesi, and Min Wei. "What does the yield
+      curve tell us about GDP growth?" (2006). Journal of Econometrics,
+      March-April 2006: 359-403.</a></li>
+  <li><a href="http://www.federalreserve.gov/pubs/feds/2006/200607/200607pap.pdf">
+    Wright, Jonathan H. "The Yield Curve and Predicting Recessions" (2007).
+    Working Papers, Federal Reserve Board, Washington, DC.</a></li>
+<li><a href="http://papers.ssrn.com/sol3/papers.cfm?abstract_id=1006838">
+      Rudebusch, Glenn D., Sack, Brian P. and Swanson, Eric T.,
+      "Macroeconomic Implications of Changes in the Term Premium"
+      (November 2006). Working Papers, Federal Reserve Bank of San
+      Francisco.</a></li>
+  <li><a href="http://pubs.amstat.org/doi/abs/10.1198/jbes.2009.07213?journalCode=jbes">
+      Rudebusch, Glenn D., Williams, John C. "Forecasting Recessions: The
+      Puzzle of the Enduring Power of the Yield Curve" (2009). Journal
+      of Business and Economic Statistics. October 1, 2009, 27(4): 492-503.</a></li>
+</ol>
+{% endblock body %}
