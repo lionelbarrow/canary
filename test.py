@@ -15,11 +15,7 @@ class TemplateTestCase(unittest.TestCase):
         assert response.status_code == 200
 
     def test_about(self):
-        response = self.app.get('/about')
-        assert response.status_code == 200
-
-    def test_models(self):
-        response = self.app.get('/models')
+        response = self.app.get('/faq')
         assert response.status_code == 200
 
 if __name__ == '__main__':

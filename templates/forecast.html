@@ -1,21 +1,9 @@
 {% extends "_app.html" %}
 {% block body %}
-            <div id="text">
-                <div id="monthly">
-                    <h3>Monthly Forecast:</h3>
-                    <b><p class="p1">Good. We are currently forecasting a 2% chance of the
-                    US being in recession at any point between next January and next
-                    June.</p></b>
-                    <img align="left" src="{{STATIC_URL}}/monthly.png" style="margin-right: 30px;
-                    margin-bottom: 30px;"/>
-
-                    <p>This forecast will automatically update on the 5th of every
-                    month, drawing data from the Federal Reserve Board website.</p>
-                    <p>Remember, it is possible for the economy to be weak or stagnant
-                    without technically entering a recession. This model does not
-                    predict the economic environment in general; it only predicts the
-                    presence or absence of a recession.
-                </div>
-                <br>
-            </div>
+<p>This forecast will automatically update on the 5th of every
+  month, drawing data from the Federal Reserve Board website.</p>
+<p>Remember, it is possible for the economy to be weak or stagnant
+  without technically entering a recession. This model does not
+  predict the economic environment in general; it only predicts the
+  presence or absence of a recession.
 {% endblock body %}
